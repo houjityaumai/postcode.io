@@ -1,0 +1,28 @@
+@charset "utf-8";
+body{
+  margin: 0;
+}
+
+header{
+  height: 50px;
+  background-color: rgba(48, 209, 155, 0.373);
+}
+main{
+  width: 1000px;
+  margin: 30px auto;
+}
+
+.result{
+  margin-top: 30px;
+}
+
+form{
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 10px;
+  transition: 0.2s;
+  padding: 30px;
+}
+
+form:hover{
+  box-shadow: 1px 1px 3px;
+}
