@@ -1,13 +1,36 @@
 $(function(){
-  const Http = new XMLHttpRequest();
-  // const url='https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060';
-  // Http.open("GET", url);
-  // Http.send();
+  let $address = $(".address"),
+      form = document.querySelector("form"),
+      val = null
+      console.log(form)
 
-  // Http.onreadystatechange = (e) => {
-  //   console.log(Http.responseText)
-  // }
+  // ボタンをクリックしたときにテキストを取得
+  $(document).ready(function(){
+    $("#button").on("click", function(){
+      val = $("#address_text").val();
+      // apiリクエスト
+      const Http = new XMLHttpRequest(); //httpやhttpsを通じてサーバーと通信するためのjavascriptのapi 
+      const url='https://zipcloud.ibsnet.co.jp/api/search?zipcode=' + `${val}`;
+      Http.open("GET", url);
+      Http.send();
 
-  $address = $(".address")
-  $address.text("aaa")
+      // Ajax httpリクエストの状態が変化したときに呼び出されるイベントハンドラ
+      Http.onreadystatechange = (e) => {
+        console.log(Http.responseText)
+        let jsostrings = Http.responseText, //文字列として取得
+            jsondata = JSON.parse(jsostrings), //オブジェクトとして取得
+            jsons = jsondata.results[0],
+            address = `${jsons.address1}` + `${jsons.address2}` + `${jsons.address3}` + `${jsons.prefcode}`
+
+            document.getElementById("address_result").textContent = address
+      }
+    });
+  })
+
+
+  // submitでページを遷移させないようにする
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+  })
+
 })
