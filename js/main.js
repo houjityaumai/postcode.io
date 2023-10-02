@@ -1,13 +1,29 @@
 $(function(){
+  let $address = $(".address"),
+      form = document.querySelector("form")
+
   const Http = new XMLHttpRequest();
-  // const url='https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060';
-  // Http.open("GET", url);
-  // Http.send();
+  const url='https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060';
+  Http.open("GET", url);
+  Http.send();
 
-  // Http.onreadystatechange = (e) => {
-  //   console.log(Http.responseText)
-  // }
+  let json = null
+  Http.onreadystatechange = (e) => {
+    console.log(Http.responseText)
+    json = Http.responseText
+  }
 
-  $address = $(".address")
-  $address.text("aaa")
+  function click(){
+    $("#button").on("click", function(){
+      let val = $("#address_text").val();
+      console.log(val);
+    });
+  };
+
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+  })
+
+
+  click();
 })
