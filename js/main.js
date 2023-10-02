@@ -11,8 +11,6 @@ $(function(){
       // apiリクエスト
       const Http = new XMLHttpRequest(); //httpやhttpsを通じてサーバーと通信するためのjavascriptのapi 
       const url='https://zipcloud.ibsnet.co.jp/api/search?zipcode=' + `${val}`;
-      console.log(val)
-      console.log(url)
       Http.open("GET", url);
       Http.send();
 
@@ -24,8 +22,7 @@ $(function(){
             jsons = jsondata.results[0],
             address = `${jsons.address1}` + `${jsons.address2}` + `${jsons.address3}` + `${jsons.prefcode}`
 
-        console.log(address)
-
+            document.getElementById("address_result").textContent = address
       }
     });
   })
